@@ -16,8 +16,8 @@ const client_secret = process.env.LINKEDIN_CLIENT_SECRET;
 
 // request of linkedin login intialize
 router.get("/linkedin", (req, res) => {
-	passport.authenticate("linkedin", { state: req.query.id });
-	id = req.query.id;
+	const response = passport.authenticate("linkedin", { state: req.query.id });
+	res.send(response);
 });
 
 // router.get("/linkedin",async(res,req)=>{
