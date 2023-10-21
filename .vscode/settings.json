@@ -1,0 +1,4 @@
+{
+	"appService.defaultWebAppToDeploy": "undefined/subscriptions/1a178ffe-227c-45b4-a87f-a9651c8b4647/resourceGroups/officeink2/providers/Microsoft.Web/sites/officeink",
+	"appService.deploySubpath": "."
+}
