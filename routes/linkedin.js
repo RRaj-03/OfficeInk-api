@@ -162,7 +162,7 @@ router.get("/linkedin/callback", async (req, res) => {
 			}
 		);
 
-		res.redirect(`http://localhost:3000/dashboard`);
+		res.redirect(`https://www.officeink.live/dashboard`);
 	}
 });
 
