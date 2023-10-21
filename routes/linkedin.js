@@ -96,7 +96,7 @@ router.get("/linkedin/callback", async (req, res) => {
 		const picture = user_info.picture;
 
 		connection.query(
-			"select * from undefined.users where LinkedinID=?",
+			"select * from officeinksch.users where LinkedinID=?",
 			[LinkedinID],
 			function (err, results, fields) {
 				if (err) throw err;
@@ -107,7 +107,7 @@ router.get("/linkedin/callback", async (req, res) => {
 					console.log("user not found");
 					//inserting data into database
 					connection.query(
-						"INSERT INTO undefined.users (LinkedinID,name,email,picture) VALUES (?, ?,?,?)",
+						"INSERT INTO officeinksch.users (LinkedinID,name,email,picture) VALUES (?, ?,?,?)",
 						[LinkedinID, name, email, picture],
 						function (err, results, fields) {
 							if (err) throw err;
@@ -116,7 +116,7 @@ router.get("/linkedin/callback", async (req, res) => {
 					);
 
 					connection.query(
-						"delete from undefined.prompt where LinkedinID=?",
+						"delete from officeinksch.prompt where LinkedinID=?",
 						[LinkedinID],
 						function (err, results, fields) {
 							if (err) throw err;
@@ -125,7 +125,7 @@ router.get("/linkedin/callback", async (req, res) => {
 					);
 
 					connection.query(
-						"delete from undefined.postprompt where LinkedinID=?",
+						"delete from officeinksch.postprompt where LinkedinID=?",
 						[LinkedinID],
 						function (err, results, fields) {
 							if (err) throw err;
@@ -135,7 +135,7 @@ router.get("/linkedin/callback", async (req, res) => {
 
 					DPFComment.forEach((element) => {
 						connection.query(
-							"INSERT INTO undefined.prompt (tone,prompt,LinkedinID) VALUES (?, ?,?)",
+							"INSERT INTO officeinksch.prompt (tone,prompt,LinkedinID) VALUES (?, ?,?)",
 							[element.tone, element.prompt, LinkedinID],
 							function (err, results, fields) {
 								if (err) throw err;
@@ -147,7 +147,7 @@ router.get("/linkedin/callback", async (req, res) => {
 					console.log("DPFComment-->    testing console  ------>>>>>>>");
 					DPprompt.forEach((element) => {
 						connection.query(
-							"INSERT INTO undefined.postprompt (Example,prompt,LinkedinID) VALUES (?, ?,?)",
+							"INSERT INTO officeinksch.postprompt (Example,prompt,LinkedinID) VALUES (?, ?,?)",
 							[element.example, element.prompt, LinkedinID],
 							function (err, results, fields) {
 								if (err) throw err;
@@ -169,7 +169,7 @@ router.get("/linkedin/callback", async (req, res) => {
 router.get("/linkedin/login/success", (req, res) => {
 	try {
 		connection.query(
-			"select * from undefined.users where LinkedinID=?",
+			"select * from officeinksch.users where LinkedinID=?",
 			[user_info1.LinkedinID],
 			function (err, results, fields) {
 				if (err) throw err;
