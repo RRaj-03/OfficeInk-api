@@ -15,11 +15,10 @@ const client_secret = process.env.LINKEDIN_CLIENT_SECRET;
 // const  redirect_uri= 'http://localhost:3000/dashboard';
 
 // request of linkedin login intialize
-router.get(
-	"/linkedin",
-	passport.authenticate("linkedin", { state: "some state" }),
-	(req, res) => {}
-);
+router.get("/linkedin", (req, res) => {
+	passport.authenticate("linkedin", { state: req.query.id });
+	id = req.query.id;
+});
 
 // router.get("/linkedin",async(res,req)=>{
 //     const redirect_uri="http://localhost:5000/auth/linkedin/callback";
@@ -44,10 +43,12 @@ var user_info1;
 var token;
 
 router.get("/linkedin/callback", async (req, res) => {
+	// console.log("req", req);
+	console.log("first", req.query);
 	const code = req.query.code;
-	// console.log("code--> ",code);
-
-	const redirect_uri = "https://backend.officeink.live/auth/linkedin/callback";
+	console.log("code--> ", code);
+	console.log("hello");
+	const redirect_uri = "http://backend.officeink.live/auth/linkedin/callback";
 	var access_token;
 	const access_token_url = `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}&client_id=${client_id}&client_secret=${client_secret}`;
 	const res_token = await axios
@@ -61,7 +62,7 @@ router.get("/linkedin/callback", async (req, res) => {
 			console.log(err);
 		});
 
-	// console.log("access_token--> ",access_token);
+	console.log("access_token--> ", access_token);
 	var user_info;
 
 	const user_info_url = `https://api.linkedin.com/v2/userinfo`;

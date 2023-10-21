@@ -46,7 +46,7 @@ app.use(
 			credentials: true,
 		},
 		{
-			origin: "http://localhost:3000",
+			origin: "https://www.officeink.live",
 			methods: ["GET", "POST", "PUT", "DELETE"],
 			credentials: true,
 		}
